@@ -2,7 +2,7 @@
 @{
     ViewData["title"] = "Dashboard";
     string fullName = Context.Session.GetString("fname") + " " + Context.Session.GetString("lname");
-    int userId =Convert.ToInt32(Context.Session.GetString("id"));
+    int userId = Convert.ToInt32(Context.Session.GetString("id"));
 }
 
 
@@ -23,6 +23,36 @@
             </div>
         </div>
 
+        <!-- Points break down -->
+        <div class="row my-3 g-2">
+            @foreach (var bal in Model.PointBalances)
+            {
+                if (bal.ItemType == ItemEnum.Uncategorized)
+                {
+                    <div class="col-md-4">
+                        <div class="card w-100 shadow bg-light"
+                            title="This points can added to complete other item points in order to redeem.">
+                            <div class="card-body">
+                                <p class="text-right text-dark f12 mb-2">Free Points</p>
+                                <h5 class="text-right m-0">@bal.Point</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-4">
+                        <div class="card w-100 shadow bg-light"
+                            title="This points can only be used to redeem a @bal.Item?.Name.">
+                            <div class="card-body">
+                                <p class="text-right text-dark f12 mb-2">@bal.Item?.Name</p>
+                                <h5 class="text-right m-0">@bal.Point</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
         <div class="mt-3 card w-100 shadow">
             <div class="card-header bg-white py-3">
                 <h6 class="m-0">Recently Added Codes</h6>
@@ -69,21 +99,30 @@
         <h5 class="text-secondary">Items you are eligble to win</h5>
         @if (Model.EligibleItems.Count > 0)
         {
-            <div class="row">
+            <div class="row g-3">
                 @foreach (var i in Model.EligibleItems)
                 {
-                    <div class="col-md-4">
-                        <div class="card shadow-sm">
+                    <div class="col-xl-3 col-lg-4 col-6">
+                        <div class="card shadow-sm @(Model.RedeemedItemIds.Contains(i.Id) ? "text-muted opacity-50" : "")">
                             <div class="card-body p-4">
                                 <img class="img-fluid" src="~/img/items/@(i.Image)" />
                             </div>
                             <div class="card-footer bg-white">
                                 <h4>@i.Name</h4>
                                 <p class="m-0 f14">Required Points <span>@i.RequiredPoints</span></p>
-                                @if (Model.AccumulatedPoint >= i.RequiredPoints)
+                                @if (Model.RedeemedItemIds.Contains(i.Id))
                                 {
-                                    <a href="#" class="btn btn-sm btn-orange w-100 rbtn" iname="@i.Name" iid="@i.Id"
-                                        iimg="/img/items/@(i.Image)">Redeem</a>
+                                    <a href="#" disabled class="btn btn-sm btn-outline-secondary w-100">&check; Redeemed</a>
+                                }
+                                else
+                                {
+                                    if ((Model.PointBalances.First(b => b.ItemType == (ItemEnum)i.Id).Point +
+                                    Model.PointBalances.First(b => b.ItemType == ItemEnum.Uncategorized).Point) >= i.RequiredPoints)
+                                    {
+                                        <a href="#" class="btn btn-sm btn-orange w-100 rbtn" iname="@i.Name" iid="@i.Id"
+                                            iimg="/img/items/@(i.Image)"
+                                            type="@((ItemEnum)i.Id == ItemEnum.AirtimeVoucher? "airtime":"others")">Redeem</a>
+                                    }
                                 }
                             </div>
                         </div>
@@ -103,10 +142,10 @@
             </div>
         }
         <h5 class="text-secondary mt-4">Items still available for win</h5>
-        <div class="row">
+        <div class="row g-3">
             @foreach (var i in Model.Items)
             {
-                <div class="col-md-4">
+                <div class="col-xl-3 col-lg-4 col-6">
                     <div class="card shadow-sm">
                         <div class="card-body p-4">
                             <img class="img-fluid" src="~/img/items/@(i.Image)" />
@@ -140,22 +179,51 @@
                 <form class="row g-2 mt-2">
                     <input type="hidden" id="userId" value="@userId" />
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Easy Mart store at 24 Bolanle street, Obalende, Lagos.
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Easy Mart store at 49 Kunle street, Ijesha, Lagos.
-                    </label>
-                </div>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Easy Mart store at 24 Bolanle street, Obalende, Lagos.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Easy Mart store at 49 Kunle street, Ijesha, Lagos.
+                        </label>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-orange" id="redeemBtn">Redeem</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="aModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Redeem Airtime</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="mt-3 text-secondary">Enter phone number for airtime top-up.</h6>
+                <form class="row g-2 mt-2">
+                    <input type="hidden" id="userId" value="@userId" />
+                    <div class="mb-3">
+                        <label for="phone" class="text-secondary f12 mb-1">Phone Number</label>
+                        <input type="text" class="form-control col-12" id="phone" name="phone"
+                            placeholder="11 digit phone number" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-orange" id="redeemBtn2">Redeem</button>
             </div>
         </div>
     </div>
@@ -169,29 +237,36 @@
                 const itemId = parseInt(btn.attr('iid'));
                 const itemName = btn.attr('iname');
                 const itemImg = btn.attr('iimg');
+                const type = btn.attr('type');
 
-                $('#mimg').attr('src', itemImg);
-                $('#iname').html(itemName);
-                $('#redeemBtn').attr("iid", itemId);
+                if (type == 'airtime') {
+                    $('#redeemBtn2').attr("iid", itemId);
 
-                $('#rModal').modal('show');
+                    $('#aModal').modal('show');
+                } else {
+                    $('#mimg').attr('src', itemImg);
+                    $('#iname').html(itemName);
+                    $('#redeemBtn').attr("iid", itemId);
+
+                    $('#rModal').modal('show');
+                }
             });
 
-            $('#redeemBtn').on('click', (e)=>{
+            $('#redeemBtn, #redeemBtn2').on('click', (e) => {
                 const btn = $(e.currentTarget);
                 const itemId = parseInt(btn.attr('iid'));
                 const userId = parseInt($('#userId').val());
-                const url = '/home/RedeemItem?itemId='+itemId+'&userId='+userId;
+                const url = '/home/RedeemItem?itemId=' + itemId + '&userId=' + userId;
 
                 $.ajax({
                     url,
-                    type:'POST',
-                    success:(res)=>{
+                    type: 'POST',
+                    success: (res) => {
                         console.log(res);
                         console.log('success');
-                       window.location.reload();
+                        window.location.reload();
                     },
-                    error:(err)=>{
+                    error: (err) => {
                         console.error(err);
                     }
                 })

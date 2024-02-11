@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets/img/easymart-logo.png"
     },
     {
+      "Id": "/Users/mario-francis/Projects/easymart-app/wwwroot/img/items/airtime.jpg",
+      "PackagePath": "staticwebassets/img/items/airtime.jpg"
+    },
+    {
       "Id": "/Users/mario-francis/Projects/easymart-app/wwwroot/img/items/bag.png",
       "PackagePath": "staticwebassets/img/items/bag.png"
     },
