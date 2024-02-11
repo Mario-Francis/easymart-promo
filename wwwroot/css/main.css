@@ -1,0 +1,102 @@
+:root{
+    --green: #418e32;
+    --dgreen: #316B25;
+    --lgreen:#56BD42;
+    --orange: #eda221;
+    --dorange: #C98A1C;
+    --dorange2: #A16E16;
+}
+
+.logo{
+    width:50px;
+}
+
+.app-name{
+    color: var(--green);
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.auth-bg{
+    /* The image used */
+  /* background-image: url("../img/auth-bg.jpg"); */
+  background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .7)), url('../img/auth-bg.jpg');
+
+  /* Set a specific height */
+  /* min-height: 500px; */
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-orange{
+    background-color: var(--orange);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+.btn-orange:hover, .btn-orange:focus,.btn-orange:active{
+    background-color: var(--dorange);
+}
+
+.f10{
+    font-size: 10px !important;
+}
+.f12{
+    font-size: 12px !important;
+}
+.f14{
+    font-size: 14px !important;
+}
+.f16{
+    font-size: 16px !important;
+}
+.f18{
+    font-size: 18px !important;
+}
+.f20{
+    font-size: 20px !important;
+}
+
+a{
+    color: var(--dgreen);
+}
+a:hover, a:focus, a:active{
+    color: var(--green);
+}
+input[type='text']::placeholder, 
+input[type='email']::placeholder, 
+input[type='tel']::placeholder,
+input[type='password']::placeholder{
+    font-size: 14px;
+    color: #999;
+}
+
+.text-green{
+    color: var(--green);
+}
+
+.text-orange{
+    color: var(--orange);
+}
+
+.bg-green{
+    background-color: var(--green);
+}
+
+.bg-lgreen{
+    background-color: var(--lgreen);
+}
+
+.bg-dgreen{
+    background-color: var(--dgreen);
+}
+.bg-orange{
+    background-color: var(--orange);
+}
+
+.bg-dorange{
+    background-color: var(--dorange);
+}

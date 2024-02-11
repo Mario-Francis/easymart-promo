@@ -1,0 +1,36 @@
+@{
+    Layout = "_AuthLayout";
+}
+@if (ViewData["err"] != null)
+{
+    <div class="alert alert-danger border border-1">
+    <p class="f14 text-danger mb-0">@ViewData["err"]</p>
+</div>
+}
+@if (TempData["suc"] != null)
+{
+    <div class="alert alert-success border border-1">
+    <p class="f14 text-success mb-0">@TempData["suc"] </p>
+</div>
+}
+<form class="row g-2" asp-action="Login">
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control col-12" id="email" name="email" placeholder="Email">
+        <label for="email" class="text-secondary">Email</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control col-12" id="password" name="password" placeholder="Password">
+        <label for="password" class="text-secondary">Password</label>
+    </div>
+    <button type="submit" class="btn btn-md btn-orange fw-normal">Login</button>
+</form>
+<p class="text-center mt-3 mb-2 fs-5 f12">Forgot your passowrd? <a href="#">Recover account.</a></p>
+<p class="text-center f12">Don't have an account? <a asp-action="Signup" asp-controller="Auth">Sign up.</a></p>
+
+@section js {
+    <script>
+        window.onload = function () {
+            console.log('hello');
+        }
+    </script>
+}

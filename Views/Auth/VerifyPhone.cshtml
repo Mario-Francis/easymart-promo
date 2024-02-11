@@ -1,0 +1,23 @@
+@model VerifyPhoneModel
+@{
+    Layout = "_AuthLayout";
+}
+@if (ViewData["err"] != null)
+{
+    <div class="alert alert-danger border border-1">
+    <p class="f14 text-danger mb-0">@ViewData["err"]</p>
+</div>
+}
+<div class="alert alert-info border border-1">
+    <p class="f14 text-secondary mb-0">A verification code has been sent to the number @Model.MaskedPhone.</p>
+</div>
+<form class="row g-2" asp-action="VerifyPhone">
+    <input type="hidden" name="userId" value="@Model.UserId" />
+    <input type="hidden" name="phone" value="@Model.Phone" />
+    <input type="hidden" name="maskedPhone" value="@Model.MaskedPhone" />
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control col-12" id="code" name="code" placeholder="Code">
+        <label for="code" class="text-secondary">Verification Code</label>
+    </div>
+    <button type="submit" class="btn btn-md btn-orange fw-normal">Verify</button>
+</form>

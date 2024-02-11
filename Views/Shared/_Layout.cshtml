@@ -1,0 +1,82 @@
+﻿@{
+    string fullName = Context.Session.GetString("fname")+" "+Context.Session.GetString("lname");
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["title"] - EasyMart Promo Portal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+</head>
+
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-1 bg-white shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="~/img/easymart-logo.png" alt="" width="30" class="d-inline-block align-text-top me-2">
+                    <span class="app-name fw-bold">EasyMart Promo Portal</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 f14">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="Home">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="PromoCodes" asp-controller="Home">My Promo Codes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="RedeemedItems" asp-controller="Home">Redeemed Items</a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li> *@
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                            Hi, @fullName
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end f14" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Change Password</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" asp-action="Logout" asp-controller="Auth">Logout</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer bg-white fixed-bottom">
+        <div class="container p-2 f14">
+            &copy; Copyright 2024 - EasyMart | All rights reserved. <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("js", required: false)
+</body>
+
+</html>

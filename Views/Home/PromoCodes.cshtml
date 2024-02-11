@@ -1,0 +1,77 @@
+@model List<UserPromoCode>
+
+
+<div class="row mt-4 mb-5">
+    <div class="col-md-4">
+        <div class="card w-100 shadow">
+            <div class="card-header bg-white py-3">
+                <h5 class="m-0">Claim new code</h5>
+            </div>
+            <div class="card-body">
+
+                @if (ViewData["err"] != null)
+                {
+                    <div class="alert alert-danger border border-1">
+                        <p class="f14 text-danger mb-0">@ViewData["err"]</p>
+                    </div>
+                }
+                @if (ViewData["suc"] != null)
+                {
+                    <div class="alert alert-success border border-1">
+                        <p class="f14 text-success mb-0">@ViewData["suc"] </p>
+                    </div>
+                }
+                <form class="row g-2" asp-action="PromoCodes" asp-controller="Home">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control col-12" id="code" name="code" placeholder="Promo code">
+                        <label for="code" class="text-secondary">Promo Code</label>
+                    </div>
+                    <button type="submit" class="btn btn-md btn-orange fw-normal">Claim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card w-100 shadow">
+            <div class="card-header bg-white py-3">
+                <h5 class="m-0">Claimed Promo Codes</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-md table-hover f14">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Code</th>
+                                <th>Point</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count > 0)
+                            {
+                                foreach (var code in Model)
+                                {
+                                    <tr>
+                                        <td>@(Model.IndexOf(code) + 1).</td>
+                                        <td>@code.PromoCode!.Code</td>
+                                        <td>@code.PromoCode!.Point</td>
+                                        <td>@code.DateClaimed.ToString("MMM d, yyyy")</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4">
+                                        <p class="mb-0 f14 text-secondary text-center">You have not claimed any promo codes.</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

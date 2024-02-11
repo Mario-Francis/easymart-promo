@@ -1,0 +1,52 @@
+@model List<RedeemedItemModel>
+
+
+<div class="row mt-4 mb-5">
+    <div class="col-md-12">
+        <div class="card w-100 shadow">
+            <div class="card-header bg-white py-3">
+                <h5 class="m-0">Redeemed Items</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-md table-hover f14 align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>&nbsp;</th>
+                                <th>Name</th>
+                                <th>Points</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(Model.IndexOf(item) + 1).</td>
+                                        <td>
+                                            <img src="~/img/items/@(item.Item.Image)" class="img-fluid" style="width:50px;" />
+                                        </td>
+                                        <td>@item.Item.Name</td>
+                                        <td>@item.Item.RequiredPoints</td>
+                                        <td>@item.DateRedeemed.ToString("MMM d, yyyy")</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5">
+                                        <p class="mb-0 f14 text-secondary text-center">You have not redeemed any items.</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
