@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tzz8zYej7KeUBEn61RVYPeZiWgXW8JxEoUfAeNSeCJM=",
+  "Hash": "DV6HdfdGdVIihMVvai624ASRgsczYecDnqpTyN5TN2M=",
   "Source": "EasyMartApp",
   "BasePath": "_content/EasyMartApp",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/img/easymart-logo.png"
+    },
+    {
+      "Identity": "/Users/mario-francis/Projects/easymart-app/wwwroot/img/items/airtime.jpg",
+      "SourceId": "EasyMartApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/mario-francis/Projects/easymart-app/wwwroot/",
+      "BasePath": "_content/EasyMartApp",
+      "RelativePath": "img/items/airtime.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/img/items/airtime.jpg"
     },
     {
       "Identity": "/Users/mario-francis/Projects/easymart-app/wwwroot/img/items/bag.png",
