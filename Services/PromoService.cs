@@ -1,5 +1,10 @@
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using EasyMartApp.Models;
 using EasyMartApp.ViewModel;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 namespace EasyMartApp.Services;
 
@@ -36,7 +41,7 @@ public class PromoService
             PromoCodes.Add(7, new PromoCode { Id = 7, Code = "A00007", Point = 1 });
             PromoCodes.Add(8, new PromoCode { Id = 8, Code = "A00008", Point = 7 });
             PromoCodes.Add(9, new PromoCode { Id = 9, Code = "A00009", Point = 3, ItemId = 3 });
-            PromoCodes.Add(10, new PromoCode { Id = 10, Code = "A00010", Point = 4 });
+            PromoCodes.Add(10, new PromoCode { Id = 10, Code = "A00010", Point = 10 });
             PromoCodes.Add(11, new PromoCode { Id = 11, Code = "A00011", Point = 4 });
             PromoCodes.Add(12, new PromoCode { Id = 12, Code = "A00012", Point = 5, ItemId = 1 });
             PromoCodes.Add(13, new PromoCode { Id = 13, Code = "A00013", Point = 2 });
@@ -46,8 +51,37 @@ public class PromoService
             PromoCodes.Add(17, new PromoCode { Id = 17, Code = "A00017", Point = 6 });
             PromoCodes.Add(18, new PromoCode { Id = 18, Code = "A00018", Point = 4, ItemId = 4 });
             PromoCodes.Add(19, new PromoCode { Id = 19, Code = "A00019", Point = 6 });
-            PromoCodes.Add(20, new PromoCode { Id = 20, Code = "A00020", Point = 4 });
+            PromoCodes.Add(20, new PromoCode { Id = 20, Code = "A00020", Point = 10 });
             PromoCodes.Add(21, new PromoCode { Id = 21, Code = "A00021", Point = 5, ItemId = 4 });
+            PromoCodes.Add(22, new PromoCode { Id = 22, Code = "A00022", Point = 4 });
+            PromoCodes.Add(23, new PromoCode { Id = 23, Code = "A00023", Point = 3 });
+            PromoCodes.Add(24, new PromoCode { Id = 24, Code = "A00024", Point = 8, ItemId = 1 });
+            PromoCodes.Add(25, new PromoCode { Id = 25, Code = "A00025", Point = 4 });
+            PromoCodes.Add(26, new PromoCode { Id = 26, Code = "A00026", Point = 2 });
+            PromoCodes.Add(27, new PromoCode { Id = 27, Code = "A00027", Point = 8, ItemId = 2 });
+            PromoCodes.Add(28, new PromoCode { Id = 28, Code = "A00028", Point = 4 });
+            PromoCodes.Add(29, new PromoCode { Id = 29, Code = "A00029", Point = 4 });
+            PromoCodes.Add(30, new PromoCode { Id = 30, Code = "A00030", Point = 10, ItemId = 3 });
+            PromoCodes.Add(31, new PromoCode { Id = 31, Code = "A00031", Point = 4 });
+            PromoCodes.Add(32, new PromoCode { Id = 32, Code = "A00032", Point = 4 });
+            PromoCodes.Add(33, new PromoCode { Id = 33, Code = "A00033", Point = 3, ItemId = 4 });
+            PromoCodes.Add(34, new PromoCode { Id = 34, Code = "A00034", Point = 7 });
+            PromoCodes.Add(35, new PromoCode { Id = 35, Code = "A00035", Point = 6 });
+            PromoCodes.Add(36, new PromoCode { Id = 36, Code = "A00036", Point = 2, ItemId = 1 });
+            PromoCodes.Add(37, new PromoCode { Id = 37, Code = "A00037", Point = 4 });
+            PromoCodes.Add(38, new PromoCode { Id = 38, Code = "A00038", Point = 1 });
+            PromoCodes.Add(39, new PromoCode { Id = 39, Code = "A00039", Point = 3, ItemId = 2 });
+            PromoCodes.Add(40, new PromoCode { Id = 40, Code = "A00040", Point = 10 });
+            PromoCodes.Add(41, new PromoCode { Id = 41, Code = "A00041", Point = 4 });
+            PromoCodes.Add(42, new PromoCode { Id = 42, Code = "A00042", Point = 7, ItemId = 3 });
+            PromoCodes.Add(43, new PromoCode { Id = 43, Code = "A00043", Point = 4 });
+            PromoCodes.Add(44, new PromoCode { Id = 44, Code = "A00044", Point = 4 });
+            PromoCodes.Add(45, new PromoCode { Id = 45, Code = "A00045", Point = 8, ItemId = 4 });
+            PromoCodes.Add(46, new PromoCode { Id = 46, Code = "A00046", Point = 5 });
+            PromoCodes.Add(47, new PromoCode { Id = 47, Code = "A00047", Point = 2 });
+            PromoCodes.Add(48, new PromoCode { Id = 48, Code = "A00048", Point = 4, ItemId = 1 });
+            PromoCodes.Add(49, new PromoCode { Id = 49, Code = "A00049", Point = 6 });
+            PromoCodes.Add(50, new PromoCode { Id = 50, Code = "A00050", Point = 10 });
 
             // add sample user
             Users.Add(1, new User { Id = 1, Email = "johndoe@gmail.com", FirstName = "John", LastName = "Doe", Password = "12345", Phone = "0123456789", IsVerified = true });
@@ -311,6 +345,47 @@ public class PromoService
             });
         }
 
+        return result;
+    }
+
+    public async Task SendMail(string code, string email)
+    {
+        var mail = new MimeMessage();
+        var from = new MailboxAddress("EASYMART PROMO PORTAL", "no_reply@mariofrancis.com.ng");
+        mail.From.Add(from);
+
+        mail.To.Add(MailboxAddress.Parse(email));
+
+        mail.Subject = "EASYMART PROMO PORTAL - Email Verification OTP";
+
+        BodyBuilder body = new BodyBuilder();
+        body.TextBody = $"""
+            Hi there,
+
+            Your one-time email verification OTP is {code}. This will expire in 5 minutes.
+
+            Bests regards,
+            EasyMart Team.
+        """;
+
+        mail.Body = body.ToMessageBody();
+        var smtp = new SmtpClient();
+        smtp.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate? cert, X509Chain? chain, SslPolicyErrors errors) => true);
+
+
+        await smtp.ConnectAsync("mail.mariofrancis.com.ng", 465, SecureSocketOptions.Auto);
+        
+        await smtp.AuthenticateAsync("no_reply@mariofrancis.com.ng", "henriofrancis");
+        
+        await smtp.SendAsync(mail);
+        await smtp.DisconnectAsync(true);
+    }
+
+    public string GenerateCode(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        string result = new string(new char[length].Select(c => chars[random.Next(chars.Length)]).ToArray());
         return result;
     }
 }

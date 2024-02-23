@@ -99,41 +99,44 @@ public class AuthController : Controller
                 });
 
                 //TempData["suc"] = "Registration successful!";
-                return RedirectToAction("VerifyPhone", new {Controller = "Auth", Phone=model.Phone, UserId = _user.Id});
+                return RedirectToAction("VerifyEmail", new {Controller = "Auth", Email=model.Email, UserId = _user.Id});
             }
         }
     }
 
-    public IActionResult VerifyPhone([FromQuery] int? userId, [FromQuery] string? phone)
+    public async Task<IActionResult> VerifyEmail([FromQuery] int? userId, [FromQuery] string? email)
     {
-        ViewData["title"] = "Verify Phone";
+        ViewData["title"] = "Verify Email";
 
-        if (userId == null || phone == null)
+        if (userId == null || email == null)
         {
             return RedirectToAction("Login");
         }
 
-        int maskCount = phone.Length / 2;
+        int maskCount = email.Length / 2;
         int offset = maskCount / 2;
-        string maskedPhone = phone.Remove(offset, maskCount).Insert(offset, new string('X', maskCount));
+        string maskedEmail = email.Remove(offset, maskCount).Insert(offset, new string('X', maskCount));
+        string expectedCode = promoService.GenerateCode(6);
+        await promoService.SendMail(expectedCode, email);
 
-        var model = new VerifyPhoneModel{
+        var model = new VerifyEmailModel{
             UserId = userId.Value,
-            Phone = phone,
-            MaskedPhone = maskedPhone
+            Email = email,
+            MaskedEmail = maskedEmail,
+            ExpectedCode = expectedCode
         };
 
         return View(model);
     }
 
     [HttpPost]
-    public IActionResult VerifyPhone(VerifyPhoneModel model)
+    public IActionResult VerifyEmail(VerifyEmailModel model)
     {
-        ViewData["title"] = "Verify Phone";
+        ViewData["title"] = "Verify Email";
 
         if(string.IsNullOrEmpty(model.Code)){
             ViewData["err"] = "Code is required!";
-        }else if(!model.Code.Equals("12345")){
+        }else if(!model.Code.Equals(model.ExpectedCode)){
             ViewData["err"] = "Invalid code!";
         }else{
             promoService.VerifyUser(model.UserId);

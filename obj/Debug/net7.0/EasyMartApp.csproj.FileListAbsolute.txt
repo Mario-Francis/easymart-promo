@@ -360,3 +360,8 @@
 /Users/mario-francis/Projects/easymart-app/bin/Debug/net7.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
 /Users/mario-francis/Projects/easymart-app/obj/Debug/net7.0/EasyMartApp.MvcApplicationPartsAssemblyInfo.cs
 /Users/mario-francis/Projects/easymart-app/obj/Debug/net7.0/EasyMartApp.csproj.CopyComplete
+/Users/mario-francis/Projects/easymart-app/bin/Debug/net7.0/BouncyCastle.Cryptography.dll
+/Users/mario-francis/Projects/easymart-app/bin/Debug/net7.0/MailKit.dll
+/Users/mario-francis/Projects/easymart-app/bin/Debug/net7.0/MimeKit.dll
+/Users/mario-francis/Projects/easymart-app/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
+/Users/mario-francis/Projects/easymart-app/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll

@@ -36,6 +36,7 @@
       "EasyMartApp/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "7.0.15",
+          "MailKit": "4.3.0",
           "Microsoft.AspNetCore.Antiforgery": "7.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "7.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "7.0.0.0",
@@ -206,7 +207,7 @@
           "System.Drawing": "4.0.0.0",
           "System.Drawing.Primitives": "7.0.0.0",
           "System.Dynamic.Runtime": "7.0.0.0",
-          "System.Formats.Asn1": "7.0.0.0",
+          "System.Formats.Asn1.Reference": "7.0.0.0",
           "System.Formats.Tar": "7.0.0.0",
           "System.Globalization.Calendars": "7.0.0.0",
           "System.Globalization": "7.0.0.0",
@@ -340,6 +341,31 @@
           "EasyMartApp.dll": {}
         }
       },
+      "BouncyCastle.Cryptography/2.2.1": {
+        "runtime": {
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.2.1.47552"
+          }
+        },
+        "compile": {
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {}
+        }
+      },
+      "MailKit/4.3.0": {
+        "dependencies": {
+          "MimeKit": "4.3.0"
+        },
+        "runtime": {
+          "lib/net6.0/MailKit.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        },
+        "compile": {
+          "lib/net6.0/MailKit.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Mvc.Razor.Extensions/6.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Razor.Language": "6.0.0",
@@ -389,8 +415,8 @@
           "System.Collections.Immutable": "5.0.0",
           "System.Memory": "4.5.4",
           "System.Reflection.Metadata": "5.0.0",
-          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
-          "System.Text.Encoding.CodePages": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encoding.CodePages": "7.0.0",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
         "runtime": {
@@ -530,17 +556,51 @@
           "lib/net7.0/Microsoft.Extensions.DependencyModel.dll": {}
         }
       },
-      "Microsoft.NETCore.Platforms/2.1.2": {},
-      "System.Collections.Immutable/5.0.0": {},
-      "System.Memory/4.5.4": {},
-      "System.Reflection.Metadata/5.0.0": {},
-      "System.Runtime.CompilerServices.Unsafe/5.0.0": {},
-      "System.Text.Encoding.CodePages/4.5.1": {
+      "MimeKit/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
-          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+          "BouncyCastle.Cryptography": "2.2.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Security.Cryptography.Pkcs": "7.0.3",
+          "System.Text.Encoding.CodePages": "7.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/MimeKit.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        },
+        "compile": {
+          "lib/net6.0/MimeKit.dll": {}
         }
       },
+      "System.Collections.Immutable/5.0.0": {},
+      "System.Formats.Asn1/7.0.0": {},
+      "System.Memory/4.5.4": {},
+      "System.Reflection.Metadata/5.0.0": {},
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "System.Security.Cryptography.Pkcs/7.0.3": {
+        "dependencies": {
+          "System.Formats.Asn1": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Security.Cryptography.Pkcs.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.823.31807"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.823.31807"
+          }
+        },
+        "compile": {
+          "lib/net7.0/System.Security.Cryptography.Pkcs.dll": {}
+        }
+      },
+      "System.Text.Encoding.CodePages/7.0.0": {},
       "System.Text.Encodings.Web/7.0.0": {},
       "System.Text.Json/7.0.0": {
         "dependencies": {
@@ -1568,7 +1628,7 @@
         },
         "compileOnly": true
       },
-      "System.Formats.Asn1/7.0.0.0": {
+      "System.Formats.Asn1.Reference/7.0.0.0": {
         "compile": {
           "System.Formats.Asn1.dll": {}
         },
@@ -2332,6 +2392,20 @@
       "serviceable": false,
       "sha512": ""
     },
+    "BouncyCastle.Cryptography/2.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A6Zr52zVqJKt18ZBsTnX0qhG0kwIQftVAjLmszmkiR/trSp8H+xj1gUOzk7XHwaKgyREMSV1v9XaKrBUeIOdvQ==",
+      "path": "bouncycastle.cryptography/2.2.1",
+      "hashPath": "bouncycastle.cryptography.2.2.1.nupkg.sha512"
+    },
+    "MailKit/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jVmB3Nr0JpqhyMiXOGWMin+QvRKpucGpSFBCav9dG6jEJPdBV+yp1RHVpKzxZPfT+0adaBuZlMFdbIciZo1EWA==",
+      "path": "mailkit/4.3.0",
+      "hashPath": "mailkit.4.3.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Mvc.Razor.Extensions/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -2388,12 +2462,12 @@
       "path": "microsoft.extensions.dependencymodel/7.0.0",
       "hashPath": "microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512"
     },
-    "Microsoft.NETCore.Platforms/2.1.2": {
+    "MimeKit/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-mOJy3M0UN+LUG21dLGMxaWZEP6xYpQEpLuvuEQBaownaX4YuhH6NmNUlN9si+vNkAS6dwJ//N1O4DmLf2CikVg==",
-      "path": "microsoft.netcore.platforms/2.1.2",
-      "hashPath": "microsoft.netcore.platforms.2.1.2.nupkg.sha512"
+      "sha512": "sha512-39KDXuERDy5VmHIn7NnCWvIVp/Ar4qnxZWg9m06DfRqDbW1B6zFv9o3Tdoa4CCu71tE/0SRqRCN5Z+bbffw6uw==",
+      "path": "mimekit/4.3.0",
+      "hashPath": "mimekit.4.3.0.nupkg.sha512"
     },
     "System.Collections.Immutable/5.0.0": {
       "type": "package",
@@ -2401,6 +2475,13 @@
       "sha512": "sha512-FXkLXiK0sVVewcso0imKQoOxjoPAj42R8HtjjbSjVPAzwDfzoyoznWxgA3c38LDbN9SJux1xXoXYAhz98j7r2g==",
       "path": "system.collections.immutable/5.0.0",
       "hashPath": "system.collections.immutable.5.0.0.nupkg.sha512"
+    },
+    "System.Formats.Asn1/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+nfpV0afLmvJW8+pLlHxRjz3oZJw4fkyU9MMEaMhCsHi/SN9bGF9q79ROubDiwTiCHezmK0uCWkPP7tGFP/4yg==",
+      "path": "system.formats.asn1/7.0.0",
+      "hashPath": "system.formats.asn1.7.0.0.nupkg.sha512"
     },
     "System.Memory/4.5.4": {
       "type": "package",
@@ -2416,19 +2497,26 @@
       "path": "system.reflection.metadata/5.0.0",
       "hashPath": "system.reflection.metadata.5.0.0.nupkg.sha512"
     },
-    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
-      "path": "system.runtime.compilerservices.unsafe/5.0.0",
-      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
-    "System.Text.Encoding.CodePages/4.5.1": {
+    "System.Security.Cryptography.Pkcs/7.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4J2JQXbftjPMppIHJ7IC+VXQ9XfEagN92vZZNoG12i+zReYlim5dMoXFC1Zzg7tsnKDM7JPo5bYfFK4Jheq44w==",
-      "path": "system.text.encoding.codepages/4.5.1",
-      "hashPath": "system.text.encoding.codepages.4.5.1.nupkg.sha512"
+      "sha512": "sha512-yhwEHH5Gzl/VoADrXtt5XC95OFoSjNSWLHNutE7GwdOgefZVRvEXRSooSpL8HHm3qmdd9epqzsWg28UJemt22w==",
+      "path": "system.security.cryptography.pkcs/7.0.3",
+      "hashPath": "system.security.cryptography.pkcs.7.0.3.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LSyCblMpvOe0N3E+8e0skHcrIhgV2huaNcjUUEa8hRtgEAm36aGkRoC8Jxlb6Ra6GSfF29ftduPNywin8XolzQ==",
+      "path": "system.text.encoding.codepages/7.0.0",
+      "hashPath": "system.text.encoding.codepages.7.0.0.nupkg.sha512"
     },
     "System.Text.Encodings.Web/7.0.0": {
       "type": "package",
@@ -3301,7 +3389,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Formats.Asn1/7.0.0.0": {
+    "System.Formats.Asn1.Reference/7.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

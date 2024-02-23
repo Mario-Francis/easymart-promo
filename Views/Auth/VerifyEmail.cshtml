@@ -1,4 +1,4 @@
-@model VerifyPhoneModel
+@model VerifyEmailModel
 @{
     Layout = "_AuthLayout";
 }
@@ -9,12 +9,13 @@
 </div>
 }
 <div class="alert alert-info border border-1">
-    <p class="f14 text-secondary mb-0">A verification code has been sent to the number @Model.MaskedPhone.</p>
+    <p class="f14 text-secondary mb-0">A verification code has been sent to the email @Model.MaskedEmail.</p>
 </div>
-<form class="row g-2" asp-action="VerifyPhone">
+<form class="row g-2" asp-action="VerifyEmail">
     <input type="hidden" name="userId" value="@Model.UserId" />
-    <input type="hidden" name="phone" value="@Model.Phone" />
-    <input type="hidden" name="maskedPhone" value="@Model.MaskedPhone" />
+    <input type="hidden" name="email" value="@Model.Email" />
+    <input type="hidden" name="maskedEmail" value="@Model.MaskedEmail" />
+    <input type="hidden" name="expectedCode" value="@Model.ExpectedCode" />
     <div class="form-floating mb-3">
         <input type="text" class="form-control col-12" id="code" name="code" placeholder="Code">
         <label for="code" class="text-secondary">Verification Code</label>

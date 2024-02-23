@@ -360,3 +360,8 @@
 /Users/mario-francis/Projects/easymart-app/obj/release/net7.0/easymartapp.pdb
 /Users/mario-francis/Projects/easymart-app/obj/release/net7.0/easymartapp.genruntimeconfig.cache
 /Users/mario-francis/Projects/easymart-app/obj/release/net7.0/ref/easymartapp.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/BouncyCastle.Cryptography.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/MailKit.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/MimeKit.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/System.Security.Cryptography.Pkcs.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll

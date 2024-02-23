@@ -301,6 +301,8 @@
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/EasyMartApp.deps.json
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/EasyMartApp.runtimeconfig.json
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/EasyMartApp.pdb
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/BouncyCastle.Cryptography.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/MailKit.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/Microsoft.AspNetCore.Razor.Language.dll
@@ -308,6 +310,8 @@
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/Microsoft.CodeAnalysis.CSharp.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/Microsoft.CodeAnalysis.Razor.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/Microsoft.Extensions.DependencyModel.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/MimeKit.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/System.Security.Cryptography.Pkcs.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/cs/Microsoft.CodeAnalysis.resources.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/de/Microsoft.CodeAnalysis.resources.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/es/Microsoft.CodeAnalysis.resources.dll
@@ -334,3 +338,4 @@
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
 /Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/mario-francis/Projects/easymart-app/bin/release/net7.0/publish/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll
